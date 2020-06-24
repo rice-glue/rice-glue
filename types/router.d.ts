@@ -1,10 +1,10 @@
-export interface GlueRouterEventFactory {
-    newHash: string;
-    oldHash: string;
+export declare class GlueRouterEventFactory {
+    // newHash: string;
+    // oldHash: string;
+    public static createEvent(type: string, data, options?);
 }
 
 export declare class GlueRouter{
-    static GlueRouterEventFactory: GlueRouterEventFactory;
     static updateRouter(routes, hash);
     static createRouter(routes, updateOnStart: boolean);
 }

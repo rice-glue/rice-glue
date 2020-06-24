@@ -21,7 +21,9 @@ module.exports = () => {
             typescript({lib: ["es5", "es6", "dom"], target: "es5"}),
             sourcemaps()
         ],
-        external: [],
+        external: [
+            'icemilk'
+        ],
         treeshake: false
     }
 };
