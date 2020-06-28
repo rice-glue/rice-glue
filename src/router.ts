@@ -56,7 +56,7 @@ class GlueRouter {
             const {newHash, oldHash} = event.detail;
             GlueRouter.updateRouter(routes, newHash);
         }, false);
-        updateOnStart && GlueRouter.updateRouter(routes, JToolUrl.portionFromUrl(window.location.href).hashpath)
+        updateOnStart && GlueRouter.updateRouter(routes, JToolUrl.portionFromUrl(window.location.href).pathname)
     }
 }
 
