@@ -3,10 +3,12 @@ import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript';
 import commonjs from 'rollup-plugin-commonjs';
 import { uglify } from "rollup-plugin-uglify";
+import sourcemaps from "rollup-plugin-sourcemaps";
 module.exports = () => {
     return [{
         input: './src/index.ts',
         output: {
+            sourceMap: false,
             name: 'rice-glue',
             globals: {
             },
@@ -17,18 +19,19 @@ module.exports = () => {
             json(),
             resolve(),
             commonjs(),
-            typescript({lib: ["es5", "es6", "dom"], target: "es5"})
+            typescript({lib: ["es5", "es6", "dom"], target: "es5"}),
+            sourcemaps(),
         ],
-        external: [ 'moment', 'axios' ],
+        external: [ 'icemilk' ],
         treeshake: true
     }, {
         input: './src/index.ts',
         output: {
-            name: 'icemilk',
+            sourceMap: false,
+            name: 'rice-glue',
             globals: {
             },
-            file: './dist/index.min.js',
-            // dir: './dist',
+            file: './dist/index.js',
             format: 'umd'
         },
         plugins: [
@@ -36,9 +39,10 @@ module.exports = () => {
             resolve(),
             commonjs(),
             typescript({lib: ["es5", "es6", "dom"], target: "es5"}),
+            sourcemaps(),
             uglify()
         ],
-        external: [],
+        external: [ 'icemilk' ],
         treeshake: true
     }]
 };
