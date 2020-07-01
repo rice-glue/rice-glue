@@ -39,9 +39,7 @@ class GlueRouter {
                     hasLoad.push({ name, node })
                 }
             } else {
-                if (hasLoad.some((_) => _.name === name)){
-                    pickNode(name, dom).style.display =  'none';
-                }
+                pickNode(name, dom).style.display =  'none';
             }
         }
         window.dispatchEvent(new Event('CHANGE_ROUTE'))
@@ -56,7 +54,8 @@ class GlueRouter {
             const {newHash, oldHash} = event.detail;
             GlueRouter.updateRouter(routes, newHash);
         }, false);
-        updateOnStart && GlueRouter.updateRouter(routes, JToolUrl.portionFromUrl(window.location.href).pathname)
+        console.log(JToolUrl.portionFromUrl(window.location.href).hashpath)
+        updateOnStart && GlueRouter.updateRouter(routes, JToolUrl.portionFromUrl(window.location.href).hashpath)
     }
 }
 
