@@ -16,7 +16,6 @@ class GlueRouterEventFactory{
     }
 }
 
-
 const pickNode = (name, dom) => {
     const node = hasLoad.find(_ => _.name === name)?.node;
     if (node){
@@ -24,6 +23,30 @@ const pickNode = (name, dom) => {
     }
     return (typeof dom === 'function' ? dom() : dom)
 };
+
+
+// const uuid = StringTool.uuid();
+// let hasRenderFinish = false;
+// (function createLoading(){
+//     const divEle = document.createElement('div');
+//     const loadingImg = document.createElement('img');
+//     loadingImg.src = loading;
+//     divEle.setAttribute('id', uuid);
+//     divEle.appendChild(loadingImg);
+//     divEle.style.cssText = rotateKeyFrames;
+//     loadingImg.style.setProperty('width', '40px');
+//     loadingImg.style.setProperty('height', '40px');
+//     loadingImg.style.setProperty('animation', 'riceglue_loading_rotate 1s linear infinite');
+//     loadingImg.style.setProperty('transform-origin', 'center center');
+//     const animName = 'riceglue_loading_rotate';
+//     const rotateKeyFrames =`@keyframes ${animName} { 100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); } }`;
+//     const style = document.createElement('style');
+//     style.innerHTML = rotateKeyFrames;
+//     divEle.appendChild(style);
+//     if (!hasRenderFinish){
+//         damaiDOM.appendChild(divEle);
+//     }
+// })();
 
 class GlueRouter {
     static updateRouter(routes, hash){
@@ -39,7 +62,15 @@ class GlueRouter {
                     hasLoad.push({ name, node })
                 }
             } else {
-                pickNode(name, dom).style.display =  'none';
+                if (typeof dom === 'object'){
+                    const node = pickNode(name, dom);
+                    hasLoad.push({ name, node });
+                    node.style.display = 'none';
+                } else {
+                    if (hasLoad.some((_) => _.name === name)) {
+                        pickNode(name, dom).style.display = 'none';
+                    }
+                }
             }
         }
         window.dispatchEvent(new Event('CHANGE_ROUTE'))
