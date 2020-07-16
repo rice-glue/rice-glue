@@ -18,7 +18,7 @@ module.exports = () => {
             json(),
             resolve(),
             commonjs(),
-            typescript({lib: ["es5", "es6", "dom"], target: "es5"}),
+            typescript(),
             sourcemaps()
         ],
         external: [

@@ -4,10 +4,8 @@ class Storage {
     }
 }
 
-import {GlueRouter, GlueRouterEventFactory} from './router';
-
 export {
     Storage,
-    GlueRouter,
-    GlueRouterEventFactory,
 }
+
+export * from './router';
